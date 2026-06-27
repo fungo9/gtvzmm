@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
-    <title>GTVZ Executor - Downloads</title>
+    <title>GTVZ EXECUTO</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
@@ -17,6 +16,9 @@
             border: none;
             background: none;
             box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         html, body {
@@ -88,7 +90,6 @@
             cursor: pointer;
         }
 
-        /* TABS */
         .tabs-menu {
             display: flex;
             gap: 8px;
@@ -107,6 +108,7 @@
             color: rgba(250, 250, 250, 0.5);
             transition: 0.2s;
             background: transparent;
+            -webkit-tap-highlight-color: transparent;
         }
         .tab-btn:hover {
             color: rgba(250, 250, 250, 0.8);
@@ -117,7 +119,6 @@
             background: rgba(0, 255, 178, 0.1);
         }
 
-        /* Cards de Download com Animação */
         .content-section {
             display: flex;
             flex-direction: column;
@@ -146,7 +147,6 @@
             }
         }
         
-        /* Delay para cada card aparecer um por um */
         .download-card:nth-child(1) { animation-delay: 0.05s; }
         .download-card:nth-child(2) { animation-delay: 0.10s; }
         .download-card:nth-child(3) { animation-delay: 0.15s; }
@@ -157,6 +157,8 @@
         .download-card:nth-child(8) { animation-delay: 0.40s; }
         .download-card:nth-child(9) { animation-delay: 0.45s; }
         .download-card:nth-child(10) { animation-delay: 0.50s; }
+        .download-card:nth-child(11) { animation-delay: 0.55s; }
+        .download-card:nth-child(12) { animation-delay: 0.60s; }
         
         .card-body {
             flex-grow: 1;
@@ -174,6 +176,7 @@
             gap: 4px;
             display: flex;
             flex-direction: column;
+            flex: 1;
         }
         .card-category {
             display: flex;
@@ -191,6 +194,13 @@
             line-height: 22px;
             color: #FAFAFA;
         }
+        .card-bio {
+            font-size: 10px;
+            color: rgba(250, 250, 250, 0.6);
+            margin-top: 2px;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
         .download-btn {
             display: flex;
             align-items: center;
@@ -199,21 +209,28 @@
             padding: 10px 20px;
             border-radius: 40px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.15s ease;
             color: #000;
             font-weight: 600;
             font-size: 14px;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            position: relative;
+        }
+        .download-btn:active {
+            transform: scale(0.92);
         }
         .download-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
             box-shadow: 0 0 20px rgba(0, 255, 178, 0.3);
         }
         .download-btn svg {
             width: 18px;
             height: 18px;
+            pointer-events: none;
         }
 
-        /* Seção de Perfil */
         .profile-section {
             display: flex;
             flex-direction: column;
@@ -243,7 +260,6 @@
             letter-spacing: 1px;
         }
         
-        /* Links abaixo da logo */
         .profile-social {
             display: flex;
             gap: 20px;
@@ -396,7 +412,6 @@
             text-align: left;
         }
 
-        /* Menu Inferior */
         .bottom-nav {
             left: 50%;
             width: 100%;
@@ -425,6 +440,7 @@
             position: relative;
             transition: 0.2s;
             padding: 0 15px 4px;
+            -webkit-tap-highlight-color: transparent;
         }
         .nav-item:hover {
             opacity: 0.8;
@@ -433,8 +449,8 @@
             opacity: 1;
             color: #00FFB2;
         }
-        .nav-item svg { width: 22px; height: auto; margin-top: 12px; }
-        .nav-item p { font-size: 10px; margin-top: 4px; font-weight: 500; }
+        .nav-item svg { width: 22px; height: auto; margin-top: 12px; pointer-events: none; }
+        .nav-item p { font-size: 10px; margin-top: 4px; font-weight: 500; pointer-events: none; }
         .nav-indicator {
             position: absolute;
             top: -2px;
@@ -463,6 +479,7 @@
             .warning-box { max-width: 100%; }
             .profile-social-link { padding: 4px 12px; }
             .profile-social-text { font-size: 10px; }
+            .card-bio { font-size: 9px; }
         }
     </style>
 </head>
@@ -481,6 +498,7 @@
             <button class="tab-btn" data-tab="tab3">ORIGINAL</button>
             <button class="tab-btn" data-tab="tab4">VNG</button>
             <button class="tab-btn" data-tab="tab6">EXECUTOR IPHONE</button>
+            <button class="tab-btn" data-tab="tab7">OUTROS APK</button>
         </div>
 
         <div id="tab1" class="content-section hidden"></div>
@@ -489,12 +507,12 @@
         <div id="tab4" class="content-section hidden"></div>
         <div id="tab5" class="content-section"></div>
         <div id="tab6" class="content-section hidden"></div>
+        <div id="tab7" class="content-section hidden"></div>
 
         <div id="profileSection" class="profile-section hidden">
             <div class="profile-image" id="profileAvatar"></div>
             <div class="profile-name">GTVZ</div>
             
-            <!-- LINKS SOCIAIS ABAIXO DA LOGO -->
             <div class="profile-social">
                 <div class="profile-social-link" onclick="window.open('https://youtube.com/@gtvzmodded', '_blank')">
                     <div class="profile-social-icon"><svg viewBox="0 0 24 24" fill="#FF0000" width="16" height="16"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.376.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.376-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
@@ -510,7 +528,6 @@
                 </div>
             </div>
             
-            <!-- STATUS GTVZ COM EMOJIS -->
             <div class="status-section">
                 <div class="status-title">---- STATUS GTVZ ----</div>
                 <div class="status-grid">
@@ -523,7 +540,6 @@
                 </div>
             </div>
             
-            <!-- STATUS ROBLOX LITE COM EMOJIS -->
             <div class="status-section">
                 <div class="status-title">---- STATUS ROBLOX LITE ----</div>
                 <div class="status-grid">
@@ -534,7 +550,6 @@
                 </div>
             </div>
             
-            <!-- AVISO VERSÕES - CENTRALIZADO -->
             <div class="warning-box">
                 <div class="warning-title">----- AVISO -----</div>
                 <div class="version-info"><span class="version-highlight">SEMI LITE :</span> POSSUI POUCA MODIFICAÇÃO E POUCA ALTERAÇÃO 39%</div>
@@ -542,10 +557,8 @@
                 <div class="version-info"><span class="version-highlight">ULTRA LITE :</span> REMOVE TUDO MODIFICAÇÃO 100%</div>
             </div>
             
-            <!-- LINHA DIVISÓRIA GRANDE -->
             <div class="divider-long"></div>
             
-            <!-- BIO CUSTOMIZADA -->
             <div class="custom-bio">
                 <p>⚙️ <span class="highlight">EU FAÇO A MINHA PRÓPRIA ATUALIZAÇÃO</span><br>
                 EU NÃO A BAIXO E RENOMEIO PRA FALAR QUE ATUALIZEI<br>
@@ -642,6 +655,16 @@ const executoresConfig = {
             { nome: "DELTA MACOS", link: "https://delta.bz/delta.dmg" },
             { nome: "ARCEUS X", link: "https://www.mediafire.com/file/6lcgdmn244ta2n5/ArceusX_1.6.4_2.668.658.ipa/file" }
         ]
+    },
+    tab7: {
+        titulo: "OUTROS APK",
+        itens: [
+            { nome: "GERENCIADO DE ARQUIVO VIP", link: "https://www.mediafire.com/file/EXEMPLO_ROOT.apk/file", bio: "APK CRACKED ANÚNCIO E PREMIUM LIBERADO" },
+            { nome: "LIMPADO DE CACHE VIP", link: "https://www.mediafire.com/file/EXEMPLO_LP.apk/file", bio: "APK CRACKED ANÚNCIO E PREMIUM LIBERADO" },
+            { nome: "OPERA MINI VIP", link: "https://www.mediafire.com/file/EXEMPLO_GG.apk/file", bio: "SEM ANÚNCIO VIP LIBERADO" },
+            { nome: "CINEGATO VIP", link: "https://www.mediafire.com/file/EXEMPLO_VPN.apk/file", bio: "SEM ANÚNCIO PREMIUM LIBERADO NAO PRECISA DE CONTA CONTEÚDO GRÁTIS VÁRIOS CANAIS DE TV SERIE FILME ANIME GRÁTIS SEM LIMITE" },
+            { nome: "BEEF SKIT", link: "https://www.mediafire.com/file/EXEMPLO_XMOD.apk/file", bio: "SEM ANÚNCIO PREMIUM LIBERADO NAO PRECISA DE CONTA CONTEÚDO GRÁTIS" }
+        ]
     }
 };
 
@@ -649,183 +672,207 @@ const executoresConfig = {
 // FUNÇÕES DE RENDERIZAÇÃO COM ANIMAÇÃO
 // ============================================
 
-    function renderizarConteudo() {
-        // Renderizar tab5 (ROBLOX LITE)
-        const containerTab5 = document.getElementById('tab5');
-        if (containerTab5) {
-            containerTab5.innerHTML = '';
-            
-            // Seção ROBLOX LITE
-            const configLite = executoresConfig.tab5;
-            configLite.itens.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'download-card';
-                card.innerHTML = `
-                    <div class="card-body">
-                        <div class="card-info">
-                            <div class="card-category"><span></span> ${configLite.titulo}</div>
-                            <div class="card-title">${item.nome}</div>
-                        </div>
-                        <div class="download-btn" onclick="baixar('${item.link}')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
-                            </svg>
-                            DOWNLOAD
-                        </div>
-                    </div>
-                `;
-                containerTab5.appendChild(card);
-            });
-            
-            // LINHA DIVISÓRIA ENTRE AS SEÇÕES
-            const divider = document.createElement('div');
-            divider.style.width = '100%';
-            divider.style.height = '2px';
-            divider.style.background = 'linear-gradient(90deg, transparent, #00FFB2, #00FFB2, #00FFB2, #00FFB2, transparent)';
-            divider.style.margin = '20px 0';
-            divider.style.borderRadius = '2px';
-            containerTab5.appendChild(divider);
-            
-            // Seção ROBLOX VNG LITE
-            const configVng = executoresConfig.tab5vng;
-            configVng.itens.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'download-card';
-                card.innerHTML = `
-                    <div class="card-body">
-                        <div class="card-info">
-                            <div class="card-category"><span></span> ${configVng.titulo}</div>
-                            <div class="card-title">${item.nome}</div>
-                        </div>
-                        <div class="download-btn" onclick="baixar('${item.link}')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
-                            </svg>
-                            DOWNLOAD
-                        </div>
-                    </div>
-                `;
-                containerTab5.appendChild(card);
-            });
-        }
+function renderizarConteudo() {
+    // Renderizar tab5 (ROBLOX LITE)
+    const containerTab5 = document.getElementById('tab5');
+    if (containerTab5) {
+        containerTab5.innerHTML = '';
         
-        // Renderizar outras tabs
-        for (let tabId in executoresConfig) {
-            if (tabId === 'tab5' || tabId === 'tab5vng') continue;
-            const container = document.getElementById(tabId);
-            if (!container) continue;
-            
-            const config = executoresConfig[tabId];
-            container.innerHTML = '';
-            
-            config.itens.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'download-card';
-                card.innerHTML = `
-                    <div class="card-body">
-                        <div class="card-info">
-                            <div class="card-category"><span></span> ${config.titulo}</div>
-                            <div class="card-title">${item.nome}</div>
-                        </div>
-                        <div class="download-btn" onclick="baixar('${item.link}')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
-                            </svg>
-                            DOWNLOAD
-                        </div>
+        const configLite = executoresConfig.tab5;
+        configLite.itens.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-info">
+                        <div class="card-category"><span></span> ${configLite.titulo}</div>
+                        <div class="card-title">${item.nome}</div>
                     </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-    }
-
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabContents = {
-        'tab1': document.getElementById('tab1'),
-        'tab2': document.getElementById('tab2'),
-        'tab3': document.getElementById('tab3'),
-        'tab4': document.getElementById('tab4'),
-        'tab5': document.getElementById('tab5'),
-        'tab6': document.getElementById('tab6')
-    };
-    const profileSection = document.getElementById('profileSection');
-    const navHome = document.getElementById('nav-home');
-    const navPerfil = document.getElementById('nav-perfil');
-    const navItems = document.querySelectorAll('.nav-item');
-    const headerAvatar = document.getElementById('headerAvatar');
-
-    function switchTab(activeTabId) {
-        profileSection.classList.add('hidden');
-        for (let id in tabContents) {
-            if (tabContents[id]) tabContents[id].classList.add('hidden');
-        }
-        if (tabContents[activeTabId]) {
-            tabContents[activeTabId].classList.remove('hidden');
-            // Resetar animação dos cards
-            const cards = tabContents[activeTabId].querySelectorAll('.download-card');
-            cards.forEach((card, index) => {
-                card.style.animation = 'none';
-                card.offsetHeight; // força reflow
-                card.style.animation = `fadeInUp 0.4s ease forwards`;
-                card.style.animationDelay = `${0.05 + index * 0.05}s`;
-            });
-        }
-        tabButtons.forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.getAttribute('data-tab') === activeTabId) btn.classList.add('active');
+                    <div class="download-btn" onclick="baixar('${item.link}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                        </svg>
+                        DOWNLOAD
+                    </div>
+                </div>
+            `;
+            containerTab5.appendChild(card);
+        });
+        
+        const divider = document.createElement('div');
+        divider.style.width = '100%';
+        divider.style.height = '2px';
+        divider.style.background = 'linear-gradient(90deg, transparent, #00FFB2, #00FFB2, #00FFB2, #00FFB2, transparent)';
+        divider.style.margin = '20px 0';
+        divider.style.borderRadius = '2px';
+        containerTab5.appendChild(divider);
+        
+        const configVng = executoresConfig.tab5vng;
+        configVng.itens.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-info">
+                        <div class="card-category"><span></span> ${configVng.titulo}</div>
+                        <div class="card-title">${item.nome}</div>
+                    </div>
+                    <div class="download-btn" onclick="baixar('${item.link}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                        </svg>
+                        DOWNLOAD
+                    </div>
+                </div>
+            `;
+            containerTab5.appendChild(card);
         });
     }
-
-    function showProfile() {
-        for (let id in tabContents) {
-            if (tabContents[id]) tabContents[id].classList.add('hidden');
-        }
-        document.querySelector('.tabs-menu').style.display = 'none';
-        profileSection.classList.remove('hidden');
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-    }
-
-    function showHome() {
-        document.querySelector('.tabs-menu').style.display = 'flex';
-        profileSection.classList.add('hidden');
-        switchTab('tab5');
-    }
-
-    navHome.addEventListener('click', function() {
-        navItems.forEach(item => item.classList.remove('active'));
-        this.classList.add('active');
-        showHome();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    navPerfil.addEventListener('click', function() {
-        navItems.forEach(item => item.classList.remove('active'));
-        this.classList.add('active');
-        showProfile();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    headerAvatar.addEventListener('click', function() {
-        navPerfil.click();
-    });
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const tabId = this.getAttribute('data-tab');
-            if (tabId) {
-                navHome.click();
-                switchTab(tabId);
-            }
+    
+    // Renderizar outras tabs (sem bio)
+    for (let tabId in executoresConfig) {
+        if (tabId === 'tab5' || tabId === 'tab5vng' || tabId === 'tab7') continue;
+        const container = document.getElementById(tabId);
+        if (!container) continue;
+        
+        const config = executoresConfig[tabId];
+        container.innerHTML = '';
+        
+        config.itens.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-info">
+                        <div class="card-category"><span></span> ${config.titulo}</div>
+                        <div class="card-title">${item.nome}</div>
+                    </div>
+                    <div class="download-btn" onclick="baixar('${item.link}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                        </svg>
+                        DOWNLOAD
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
         });
-    });
-
-    function baixar(url) {
-        window.open(url, '_blank');
     }
+    
+    // Renderizar tab7 (OUTROS APK - COM BIO)
+    const containerTab7 = document.getElementById('tab7');
+    if (containerTab7) {
+        containerTab7.innerHTML = '';
+        const config = executoresConfig.tab7;
+        config.itens.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-info">
+                        <div class="card-category"><span></span> ${config.titulo}</div>
+                        <div class="card-title">${item.nome}</div>
+                        <div class="card-bio">${item.bio || ''}</div>
+                    </div>
+                    <div class="download-btn" onclick="baixar('${item.link}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                        </svg>
+                        DOWNLOAD
+                    </div>
+                </div>
+            `;
+            containerTab7.appendChild(card);
+        });
+    }
+}
 
-    renderizarConteudo();
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = {
+    'tab1': document.getElementById('tab1'),
+    'tab2': document.getElementById('tab2'),
+    'tab3': document.getElementById('tab3'),
+    'tab4': document.getElementById('tab4'),
+    'tab5': document.getElementById('tab5'),
+    'tab6': document.getElementById('tab6'),
+    'tab7': document.getElementById('tab7')
+};
+const profileSection = document.getElementById('profileSection');
+const navHome = document.getElementById('nav-home');
+const navPerfil = document.getElementById('nav-perfil');
+const navItems = document.querySelectorAll('.nav-item');
+const headerAvatar = document.getElementById('headerAvatar');
+
+function switchTab(activeTabId) {
+    profileSection.classList.add('hidden');
+    for (let id in tabContents) {
+        if (tabContents[id]) tabContents[id].classList.add('hidden');
+    }
+    if (tabContents[activeTabId]) {
+        tabContents[activeTabId].classList.remove('hidden');
+        const cards = tabContents[activeTabId].querySelectorAll('.download-card');
+        cards.forEach((card, index) => {
+            card.style.animation = 'none';
+            card.offsetHeight;
+            card.style.animation = `fadeInUp 0.4s ease forwards`;
+            card.style.animationDelay = `${0.05 + index * 0.05}s`;
+        });
+    }
+    tabButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-tab') === activeTabId) btn.classList.add('active');
+    });
+}
+
+function showProfile() {
+    for (let id in tabContents) {
+        if (tabContents[id]) tabContents[id].classList.add('hidden');
+    }
+    document.querySelector('.tabs-menu').style.display = 'none';
+    profileSection.classList.remove('hidden');
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+}
+
+function showHome() {
+    document.querySelector('.tabs-menu').style.display = 'flex';
+    profileSection.classList.add('hidden');
+    switchTab('tab5');
+}
+
+navHome.addEventListener('click', function() {
+    navItems.forEach(item => item.classList.remove('active'));
+    this.classList.add('active');
     showHome();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+navPerfil.addEventListener('click', function() {
+    navItems.forEach(item => item.classList.remove('active'));
+    this.classList.add('active');
+    showProfile();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+headerAvatar.addEventListener('click', function() {
+    navPerfil.click();
+});
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        if (tabId) {
+            navHome.click();
+            switchTab(tabId);
+        }
+    });
+});
+
+function baixar(url) {
+    window.open(url, '_blank');
+}
+
+renderizarConteudo();
+showHome();
 </script>
 </body>
 </html>
